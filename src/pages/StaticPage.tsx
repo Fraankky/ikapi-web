@@ -11,16 +11,20 @@ interface StaticPageProps {
   slugs: string[]
   eyebrow?: string
   fallback?: ReactNode
+  preferFallback?: boolean
 }
 
-export function StaticPage({ title, slugs, eyebrow = 'IKAPI DIY', fallback }: StaticPageProps) {
+export function StaticPage({ title, slugs, eyebrow = 'IKAPI DIY', fallback, preferFallback = false }: StaticPageProps) {
   const { data, isLoading, error } = usePage(slugs)
-  const safeTitle = data?.title.rendered ? sanitizeWordPressHtml(data.title.rendered) : ''
+  const pageData = preferFallback ? undefined : data
+  const pageIsLoading = preferFallback ? false : isLoading
+  const pageError = preferFallback ? null : error
+  const safeTitle = pageData?.title.rendered ? sanitizeWordPressHtml(pageData.title.rendered) : ''
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+    <main className="mx-auto max-w-4xl px-4 pb-14 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-20 lg:pt-40">
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--ikapi-accent)]">{eyebrow}</p>
-      {data?.title.rendered ? (
+      {pageData?.title.rendered ? (
         <h1
           className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-[var(--ikapi-ink)] sm:text-5xl"
           dangerouslySetInnerHTML={{ __html: safeTitle }}
@@ -31,11 +35,11 @@ export function StaticPage({ title, slugs, eyebrow = 'IKAPI DIY', fallback }: St
         </h1>
       )}
       <div className="mt-8">
-        {isLoading ? <LoadingSpinner /> : null}
-        {error ? <ErrorMessage message={(error as Error).message} /> : null}
-        {!isLoading ? (
-          data?.content.rendered ? (
-            <PageContent htmlContent={data.content.rendered} fallback={fallback} />
+        {pageIsLoading ? <LoadingSpinner /> : null}
+        {pageError ? <ErrorMessage message={(pageError as Error).message} /> : null}
+        {!pageIsLoading ? (
+          pageData?.content.rendered ? (
+            <PageContent htmlContent={pageData.content.rendered} fallback={fallback} />
           ) : fallback ? (
             <PageContent fallback={fallback} />
           ) : (

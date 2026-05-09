@@ -76,10 +76,47 @@ function buildCollectionQuery(params: Record<string, string | number | boolean |
 export function getAllPosts(perPage = 10): Promise<WPPost[]> {
   const query = buildCollectionQuery({
     _embed: true,
-    per_page: perPage,
+    per_page: Math.min(100, Math.max(perPage * 4, perPage)),
   })
 
-  return fetchFromWP<WPPost[]>(`/posts?${query}`, 'Gagal mengambil daftar berita')
+  return fetchFromWP<WPPost[]>(`/posts?${query}`, 'Gagal mengambil daftar berita').then(
+    (posts) => posts.filter(isPublishedContentPost).slice(0, perPage),
+  )
+}
+
+function isPublishedContentPost(post: WPPost) {
+  const searchableText = [
+    post.slug,
+    post.title.rendered,
+    post.excerpt.rendered,
+  ]
+    .join(' ')
+    .replace(/<[^>]*>/g, ' ')
+    .toLowerCase()
+
+  const dummyPatterns = [
+    'hello world',
+    'sample post',
+    'dummy',
+    'lorem ipsum',
+    'test post',
+    'contoh berita',
+    'blog 1',
+    'blog 2',
+    'blog 3',
+    'blog 4',
+    'fintech',
+    'banking industry',
+    'small business owners',
+    'future of fintech',
+    'technology is changing finance',
+    'her old collecting she considered discovered',
+  ]
+
+  return (
+    !/^blog-\d+$/i.test(post.slug) &&
+    !dummyPatterns.some((pattern) => searchableText.includes(pattern))
+  )
 }
 
 export async function getPostBySlug(slug: string): Promise<WPPost | null> {
@@ -93,7 +130,9 @@ export async function getPostBySlug(slug: string): Promise<WPPost | null> {
     `Gagal mengambil berita "${slug}"`,
   )
 
-  return posts[0] ?? null
+  const post = posts[0] ?? null
+
+  return post && isPublishedContentPost(post) ? post : null
 }
 
 export function getAllPages(): Promise<WPPage[]> {

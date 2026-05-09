@@ -17,7 +17,7 @@ import { VisiMisiPage } from './pages/tentang/VisiMisiPage'
 
 function Layout() {
   return (
-    <div className="min-h-[100dvh] bg-[var(--ikapi-paper)] text-slate-700">
+    <div>
       <Navbar />
       <Outlet />
       <Footer />

@@ -1,6 +1,6 @@
-import { StaticPage } from '../StaticPage'
-import { staticPages } from '../../content/sitePages'
+import { ProfilePage } from '../../components/ui/ProfilePage'
+import { profilePageConfigs } from '../../content/sitePages'
 
 export function DataAnggotaPage() {
-  return <StaticPage {...staticPages.dataAnggota} />
+  return <ProfilePage data={profilePageConfigs.dataAnggota.data} slugs={profilePageConfigs.dataAnggota.slugs} />
 }

@@ -6,6 +6,7 @@ export type StaticPageConfig = {
   eyebrow?: string
   slugs: string[]
   fallback?: ReactNode
+  preferFallback?: boolean
 }
 
 export type ProfilePageConfig = {
@@ -86,25 +87,40 @@ export const staticPages = {
     title: 'Hubungi IKAPI DIY',
     eyebrow: 'Kontak',
     slugs: ['kontak', 'contact'],
+    preferFallback: true,
     fallback: (
-      <div className="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
-        <div className="rounded-[1.5rem] border border-[#e2d8c8] bg-[#fffdfa] p-6">
-          <h2 className="text-2xl font-extrabold tracking-tight text-[var(--ikapi-ink)]">Sekretariat</h2>
-          <p className="mt-3 text-slate-600">
-            Informasi kontak resmi dapat dikelola melalui WordPress. Gunakan halaman ini untuk
-            menampilkan alamat sekretariat, jam layanan, narahubung, atau formulir informasi.
+      <div className="grid gap-4">
+        <div className="rounded-xl border border-[#e2d8c8] bg-[#fffaf2] p-6">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ikapi-accent)]">
+            Sekretariat
+          </p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-[-0.035em] text-[var(--ikapi-ink)]">
+            IKAPI Daerah Istimewa Yogyakarta
+          </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-slate-600">
+            Jl. Kenanga No. 164, Sambilegi Kidul, Maguwoharjo, Kec. Depok,
+            Sleman, Daerah Istimewa Yogyakarta.
           </p>
         </div>
-        <div className="rounded-[1.5rem] border border-[#e2d8c8] bg-[#fffdfa] p-6">
-          <h2 className="text-2xl font-extrabold tracking-tight text-[var(--ikapi-ink)]">Website</h2>
-          <a
-            className="mt-3 block font-semibold text-[var(--ikapi-ink)] hover:text-[var(--ikapi-accent)]"
-            href="https://ikapidiy.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            ikapidiy.com
-          </a>
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            ['Email', 'sekre.ikapidiy@gmail.com', 'mailto:sekre.ikapidiy@gmail.com'],
+            ['Telepon/WhatsApp', '0812-1239-7791', 'https://wa.me/6281212397791'],
+            ['Media Sosial', '@ikapi_yogyakarta', 'https://www.instagram.com/ikapi_yogyakarta/'],
+          ].map(([label, value, href]) => (
+            <a
+              key={label}
+              className="rounded-xl border border-[#e2d8c8] bg-[#fffaf2] p-5 transition hover:-translate-y-0.5 hover:border-[#cbbda9]"
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noreferrer' : undefined}
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--ikapi-accent)]">
+                {label}
+              </p>
+              <p className="mt-3 font-semibold tracking-[-0.02em] text-[var(--ikapi-ink)]">{value}</p>
+            </a>
+          ))}
         </div>
       </div>
     ),
@@ -158,23 +174,28 @@ export const profilePageConfigs: Record<ProfilePageKey, ProfilePageConfig> = {
   },
   adart: {
     key: 'adart',
-    slugs: ['ad-art', 'adart'],
+    slugs: ['ad-art-ikapi', 'ad-art', 'adart'],
     data: profilePages.adart,
   },
   struktur: {
     key: 'struktur',
-    slugs: ['struktur-pengurus', 'struktur'],
+    slugs: ['struktur-organisasi', 'struktur-pengurus-ikapi-diy', 'struktur-pengurus', 'struktur'],
     data: profilePages.struktur,
   },
   syarat: {
     key: 'syarat',
-    slugs: ['syarat-keanggotaan', 'syarat-anggota', 'syarat'],
+    slugs: ['syarat-menjadi-anggota-ikapi', 'syarat-menjadi-anggota', 'syarat-keanggotaan', 'syarat-anggota', 'syarat'],
     data: profilePages.syarat,
   },
   manfaat: {
     key: 'manfaat',
-    slugs: ['manfaat-keanggotaan', 'manfaat-anggota', 'manfaat'],
+    slugs: ['manfaat-menjadi-anggota', 'manfaat-keanggotaan', 'manfaat-anggota', 'manfaat'],
     data: profilePages.manfaat,
+  },
+  dataAnggota: {
+    key: 'dataAnggota',
+    slugs: ['anggota-ikapi', 'data-anggota-ikapi-diy', 'data-anggota'],
+    data: profilePages.dataAnggota,
   },
 }
 
@@ -185,7 +206,7 @@ export const navigationPageSlugs = {
   struktur: profilePageConfigs.struktur.slugs,
   syarat: profilePageConfigs.syarat.slugs,
   manfaat: profilePageConfigs.manfaat.slugs,
-  dataAnggota: staticPages.dataAnggota.slugs,
+  dataAnggota: profilePageConfigs.dataAnggota.slugs,
   program: staticPages.program.slugs,
   kontak: staticPages.kontak.slugs,
   jogjaBookFair: staticPages.jogjaBookFair.slugs,

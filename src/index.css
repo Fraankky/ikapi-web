@@ -2,12 +2,15 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  --ikapi-ink: #14223a;
-  --ikapi-ink-soft: #223451;
-  --ikapi-paper: #f8f6f1;
-  --ikapi-panel: #fffdfa;
-  --ikapi-line: #e4ded2;
-  --ikapi-accent: #b66a3c;
+  --ikapi-ink: #142238;
+  --ikapi-ink-soft: #253650;
+  --ikapi-paper: #f4efe6;
+  --ikapi-panel: #fffaf2;
+  --ikapi-panel-soft: #eee4d6;
+  --ikapi-line: #dfd2bf;
+  --ikapi-accent: #9d5a35;
+  --ikapi-accent-soft: #d9b08d;
+  --ikapi-muted: #6c756f;
 }
 
 html {
@@ -17,17 +20,39 @@ html {
 body {
   margin: 0;
   font-family:
-    'Plus Jakarta Sans', Outfit, Satoshi, ui-sans-serif, system-ui, -apple-system,
+    Outfit, Satoshi, 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background:
-    radial-gradient(circle at 12% 4%, rgb(182 106 60 / 0.1), transparent 28rem),
-    linear-gradient(180deg, #fffdfa 0%, var(--ikapi-paper) 100%);
+    radial-gradient(circle at 11% 7%, rgb(157 90 53 / 0.16), transparent 28rem),
+    radial-gradient(circle at 83% 12%, rgb(20 34 56 / 0.08), transparent 25rem),
+    linear-gradient(180deg, #fffaf2 0%, var(--ikapi-paper) 48%, #efe6d8 100%);
   color: #334155;
   font-variant-numeric: tabular-nums;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    linear-gradient(115deg, rgb(20 34 56 / 0.28) 0 1px, transparent 1px),
+    radial-gradient(circle at 20% 20%, rgb(20 34 56 / 0.22) 0 1px, transparent 1px);
+  background-size:
+    44px 44px,
+    9px 9px;
+  mix-blend-mode: multiply;
+}
+
 #root {
   min-height: 100vh;
+}
+
+::selection {
+  background: rgb(157 90 53 / 0.22);
+  color: var(--ikapi-ink);
 }
 
 button,
@@ -62,4 +87,16 @@ button:focus-visible {
 
 .prose p {
   text-wrap: pretty;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.ikapi-shell {
+  border: 1px solid rgb(223 210 191 / 0.9);
+  background: rgb(255 250 242 / 0.62);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.72),
+    0 28px 80px -56px rgb(20 34 56 / 0.72);
 }

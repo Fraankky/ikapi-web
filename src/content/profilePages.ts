@@ -5,6 +5,7 @@ export type ProfilePageKey =
   | 'struktur'
   | 'syarat'
   | 'manfaat'
+  | 'dataAnggota'
 
 type NavItem = {
   label: string
@@ -46,12 +47,12 @@ export const profileNav: Record<ProfilePageData['category'], NavItem[]> = {
     { label: 'Sejarah IKAPI', href: '/tentang/sejarah' },
     { label: 'Visi dan Misi', href: '/tentang/visi-misi' },
     { label: 'AD/ART IKAPI', href: '/tentang/adart' },
-    { label: 'Struktur Organisasi', href: '/tentang/struktur' },
+    { label: 'Struktur Pengurus IKAPI', href: '/tentang/struktur' },
   ],
   keanggotaan: [
-    { label: 'Syarat Anggota', href: '/keanggotaan/syarat' },
-    { label: 'Manfaat Anggota', href: '/keanggotaan/manfaat' },
-    { label: 'Data Anggota DIY', href: '/keanggotaan/data-anggota' },
+    { label: 'Syarat Menjadi Anggota IKAPI', href: '/keanggotaan/syarat' },
+    { label: 'Manfaat Menjadi Anggota', href: '/keanggotaan/manfaat' },
+    { label: 'Data Anggota IKAPI DIY', href: '/keanggotaan/data-anggota' },
   ],
 }
 
@@ -66,7 +67,7 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
     category: 'tentang',
     stats: [
       { value: '17 Mei 1950', label: 'IKAPI didirikan di Jakarta' },
-      { value: '13 pendiri', label: 'Penerbit awal yang menggagas organisasi' },
+      { value: '13-14', label: 'Penerbit bergabung pada masa awal' },
       { value: 'Panca Daya', label: 'Semangat dasar kerja organisasi' },
     ],
     sections: [
@@ -74,8 +75,8 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         eyebrow: 'Awal Organisasi',
         title: 'Lahir dari kebutuhan penerbit nasional',
         body: [
-          'IKAPI dibentuk pada masa awal Republik Indonesia ketika dunia penerbitan membutuhkan wadah bersama. Organisasi ini menjadi tempat penerbit menyatukan suara, memperkuat tata kelola profesi, dan ikut membangun pendidikan bangsa melalui buku.',
-          'Sejak awal, IKAPI bergerak dengan semangat kebersamaan. Penerbit dipandang bukan hanya sebagai pelaku usaha, tetapi juga bagian dari kerja kebudayaan dan pendidikan nasional.',
+          'IKAPI didirikan pada 17 Mei 1950 di Jakarta sebagai asosiasi profesi penerbit buku Indonesia. Para inisiator yang disebut dalam sejarah IKAPI adalah Sutan Takdir Alisjahbana, M. Jusuf Ahmad, dan Nyonya A. Notosoetardjo.',
+          'Organisasi ini lahir dari semangat nasionalisme setelah kemerdekaan. Pada masa awal, IKAPI menjadi wadah bagi penerbit untuk menyatukan kerja profesi, memperkuat ekosistem buku, dan ikut mencerdaskan kehidupan bangsa.',
         ],
       },
       {
@@ -88,11 +89,11 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
           },
           {
             title: '1953',
-            body: 'IKAPI mulai memperluas jaringan kerja organisasi dan memperkuat peran penerbit dalam ekosistem buku nasional.',
+            body: 'IKAPI merangkul Gabungan Penerbit Medan sehingga lahir cabang Sumatra Utara sebagai cabang IKAPI pertama.',
           },
           {
             title: '1954',
-            body: 'Organisasi terus mengonsolidasikan penerbit anggota dan menegaskan peran buku dalam pembangunan bangsa.',
+            body: 'Kongres IKAPI I di Jakarta mengesahkan pembentukan cabang Jakarta, Jawa Tengah, Jawa Timur, Sumatra Barat, dan Sumatra Utara.',
           },
           {
             title: 'Kini',
@@ -104,11 +105,11 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         eyebrow: 'Nilai Kerja',
         title: 'Panca Daya sebagai arah gerak',
         items: [
-          'Meningkatkan mutu penerbitan dan profesionalisme penerbit.',
-          'Memperkuat jaringan antar-penerbit dan pemangku kepentingan perbukuan.',
-          'Mendorong distribusi buku yang sehat dan menjangkau pembaca lebih luas.',
-          'Mengembangkan budaya baca dan apresiasi terhadap buku.',
-          'Menjaga peran penerbit sebagai bagian dari pembangunan ilmu pengetahuan dan kebudayaan.',
+          'Memperluas kesempatan membaca melalui pengembangan perpustakaan.',
+          'Mengembangkan penerbitan buku pendidikan dan pengajaran.',
+          'Menyebarkan karya sastra Indonesia melalui ekspor hak cipta dan buku.',
+          'Melindungi hak cipta serta membantu penerbitan buku universitas dan sastra.',
+          'Mengembangkan industri grafika untuk mendukung kebutuhan pencetakan buku.',
         ],
       },
     ],
@@ -129,20 +130,19 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
     sections: [
       {
         eyebrow: 'Visi',
-        title: 'Industri penerbitan yang kuat dan bermartabat',
+        title: 'Industri penerbitan yang mampu berkiprah luas',
         body: [
-          'IKAPI mendorong terwujudnya industri penerbitan buku Indonesia yang sehat, profesional, mandiri, dan mampu memenuhi kebutuhan pembaca di dalam negeri maupun pasar yang lebih luas.',
+          'IKAPI menetapkan visi agar industri penerbitan buku di Indonesia mampu memenuhi kebutuhan pasar dalam negeri dan berkiprah di pasar internasional.',
         ],
       },
       {
         eyebrow: 'Misi',
-        title: 'Ruang kerja bagi penerbit dan literasi',
+        title: 'Ikut mencerdaskan kehidupan bangsa',
         items: [
-          'Memperjuangkan kepentingan penerbit anggota dalam kebijakan perbukuan dan ekosistem literasi.',
-          'Meningkatkan kapasitas, etika, dan profesionalisme penerbit.',
-          'Mendorong kerja sama antara penerbit, pemerintah, lembaga pendidikan, komunitas, dan pembaca.',
-          'Memperluas akses masyarakat terhadap buku yang bermutu.',
-          'Mengembangkan promosi, pameran, dan kegiatan perbukuan yang berdampak bagi anggota.',
+          'Menciptakan iklim perbukuan yang kondusif.',
+          'Mengembangkan sistem perbukuan yang kompetitif.',
+          'Meningkatkan profesionalisme asosiasi dan para anggotanya.',
+          'Mendorong perbukuan nasional agar berperan optimal dalam masyarakat demokratis yang terbuka dan bertanggung jawab.',
         ],
       },
       {
@@ -183,8 +183,8 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         eyebrow: 'Dokumen Organisasi',
         title: 'Rujukan resmi tata kelola IKAPI',
         body: [
-          'AD/ART IKAPI memuat ketentuan dasar organisasi, tujuan, keanggotaan, struktur, permusyawaratan, dan aturan operasional yang menjadi pedoman seluruh pengurus serta anggota.',
-          'Untuk kebutuhan legal dan keputusan formal, halaman IKAPI Pusat tetap menjadi rujukan dokumen terbaru.',
+          'AD/ART adalah landasan operasional dasar organisasi. Dokumen ini bukan hanya memuat aturan, tetapi juga menjelaskan visi, misi, struktur organisasi, dan pembagian tugas dalam IKAPI.',
+          'Untuk kebutuhan legal, administrasi, dan keputusan formal, halaman IKAPI Pusat tetap menjadi rujukan dokumen terbaru yang perlu diperiksa oleh pengurus dan anggota.',
         ],
       },
       {
@@ -220,23 +220,23 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
   },
   struktur: {
     eyebrow: 'Tentang IKAPI',
-    title: 'Struktur Organisasi IKAPI',
+    title: 'Struktur Pengurus IKAPI',
     lead:
       'Struktur organisasi IKAPI memperlihatkan pembagian peran pengurus dalam menjalankan fungsi asosiasi, layanan anggota, advokasi, dan program perbukuan.',
-    sourceLabel: 'Struktur Organisasi - IKAPI Pusat',
+    sourceLabel: 'Struktur Pengurus IKAPI Pusat - IKAPI Pusat',
     sourceUrl: 'https://www.ikapi.org/struktur-organisasi/',
     category: 'tentang',
     stats: [
-      { value: 'Pengurus', label: 'Memimpin arah organisasi' },
+      { value: '2025-2030', label: 'Periode pengurus pusat terbaru' },
+      { value: 'DPP', label: 'Dewan Pertimbangan Pusat' },
       { value: 'Bidang', label: 'Mengelola program strategis' },
-      { value: 'Daerah', label: 'Menguatkan jaringan wilayah' },
     ],
     sections: [
       {
         eyebrow: 'Susunan',
-        title: 'Pembagian peran organisasi',
+        title: 'Susunan Pengurus IKAPI Pusat 2025-2030',
         body: [
-          'Secara umum, struktur IKAPI terdiri dari unsur ketua, sekretariat, bendahara, dan bidang-bidang kerja. Pembagian ini memastikan organisasi dapat menjalankan administrasi, program, komunikasi, advokasi, dan layanan keanggotaan secara terarah.',
+          'Sumber IKAPI Pusat menampilkan susunan pengurus periode 2025-2030. Di dalamnya terdapat Dewan Pertimbangan Pusat dan Pengurus Pusat yang menjalankan mandat organisasi pada tingkat nasional.',
         ],
       },
       {
@@ -244,20 +244,20 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         title: 'Fokus kerja dalam struktur',
         cards: [
           {
-            title: 'Kepemimpinan',
-            body: 'Menentukan arah strategis organisasi, menjaga hubungan antarlembaga, dan memastikan keputusan berjalan.',
+            title: 'Dewan Pertimbangan Pusat',
+            body: 'Berisi unsur ketua, wakil ketua, dan anggota yang memberi pertimbangan bagi arah organisasi.',
           },
           {
-            title: 'Sekretariat',
-            body: 'Mengelola administrasi, komunikasi, dokumentasi, agenda rapat, serta kebutuhan layanan anggota.',
+            title: 'Ketua Umum dan Sekretariat',
+            body: 'Memimpin arah organisasi, mengelola administrasi, komunikasi, dokumentasi, dan pelaksanaan agenda.',
           },
           {
-            title: 'Keuangan',
-            body: 'Mengatur pencatatan, pelaporan, dan tata kelola keuangan organisasi.',
+            title: 'Bendahara Umum',
+            body: 'Menangani pencatatan, pelaporan, dan tata kelola keuangan organisasi.',
           },
           {
-            title: 'Bidang Program',
-            body: 'Merancang kegiatan literasi, pameran buku, pelatihan, advokasi, dan kerja sama perbukuan.',
+            title: 'Bidang Kerja',
+            body: 'Mengelola organisasi, kerja sama, kebijakan perbukuan, pameran, budaya baca, hukum, riset, dan transformasi perbukuan.',
           },
         ],
       },
@@ -288,11 +288,11 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         eyebrow: 'Kriteria Umum',
         title: 'Siapa yang dapat mendaftar',
         items: [
-          'Penerbit yang memiliki kegiatan penerbitan buku secara nyata dan berkelanjutan.',
-          'Memiliki legalitas usaha atau badan hukum sesuai ketentuan yang berlaku.',
-          'Memiliki alamat dan penanggung jawab yang jelas.',
-          'Menerbitkan buku dengan identitas penerbit yang dapat diverifikasi.',
-          'Bersedia menaati AD/ART, keputusan organisasi, dan kewajiban keanggotaan.',
+          'Anggota biasa adalah badan usaha atau lembaga penerbit buku, baik swasta maupun milik negara.',
+          'Penerbit berbentuk badan usaha atau badan hukum yang disahkan melalui akta notaris atau dokumen resmi dari instansi terkait.',
+          'Memiliki izin usaha dari instansi pemerintah yang berwenang.',
+          'Kegiatan menerbitkan buku tercantum jelas dalam anggaran dasar dan/atau izin usaha.',
+          'Memiliki alamat kantor tetap, karyawan tetap sekurang-kurangnya tiga orang, dan telah menerbitkan minimal tiga judul buku ber-ISBN.',
         ],
       },
       {
@@ -305,11 +305,11 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
           },
           {
             title: 'Legalitas',
-            body: 'Dokumen usaha atau badan hukum yang menunjukkan penerbit beroperasi secara sah.',
+            body: 'Salinan akta notaris atau dokumen resmi, izin usaha, dan surat keterangan domisili sesuai jenis keanggotaan.',
           },
           {
             title: 'Daftar Terbitan',
-            body: 'Katalog atau contoh buku yang memperlihatkan aktivitas penerbitan.',
+            body: 'Masing-masing dua eksemplar dari sekurang-kurangnya tiga judul buku yang telah diterbitkan dan memiliki ISBN.',
           },
         ],
       },
@@ -320,7 +320,8 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         items: [
           'Calon anggota menyiapkan dokumen dan menghubungi sekretariat IKAPI daerah.',
           'Pengurus melakukan pemeriksaan administrasi dan verifikasi data penerbit.',
-          'Permohonan diproses sesuai mekanisme organisasi.',
+          'Pengurus daerah menyampaikan pendapat dan saran kepada Pengurus Pusat sesuai mekanisme organisasi.',
+          'Pengurus Pusat memberikan keputusan tertulis kepada pengurus daerah atau calon anggota sesuai ketentuan.',
           'Penerbit yang diterima memenuhi kewajiban administrasi dan iuran anggota.',
         ],
       },
@@ -346,15 +347,15 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
         cards: [
           {
             title: 'Jaringan Profesional',
-            body: 'Anggota terhubung dengan penerbit lain, pengurus, mitra, komunitas literasi, dan pemangku kepentingan perbukuan.',
+            body: 'Anggota terhubung dengan penerbit lain sehingga dapat membangun silaturahim, kerja sama penerbitan bersama, dan kolaborasi lain.',
           },
           {
             title: 'Informasi Industri',
-            body: 'Mendapat akses kabar, kebijakan, peluang kerja sama, dan agenda penting di dunia penerbitan.',
+            body: 'Mendapat informasi tentang kebijakan pemerintah, proyek pengadaan buku, dan kegiatan nasional maupun internasional di bidang perbukuan.',
           },
           {
             title: 'Advokasi Perbukuan',
-            body: 'IKAPI menjadi wadah bersama untuk menyuarakan kepentingan penerbit dalam isu regulasi dan ekosistem buku.',
+            body: 'IKAPI memberi perlindungan kode etik bisnis penerbitan buku serta bantuan advokasi untuk masalah terkait perbukuan.',
           },
           {
             title: 'Pameran dan Promosi',
@@ -362,7 +363,7 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
           },
           {
             title: 'Penguatan Kapasitas',
-            body: 'Pelatihan, diskusi, dan forum organisasi membantu penerbit meningkatkan mutu kerja dan daya saing.',
+            body: 'Seminar, lokakarya, pelatihan, dan forum organisasi membantu penerbit meningkatkan profesionalitas perbukuan.',
           },
           {
             title: 'Kredibilitas Organisasi',
@@ -384,6 +385,62 @@ export const profilePages: Record<ProfilePageKey, ProfilePageData> = {
           'Rapikan profil penerbit dan data legalitas.',
           'Kumpulkan daftar buku yang sudah diterbitkan.',
           'Hubungi sekretariat IKAPI DIY untuk proses pendaftaran dan verifikasi.',
+        ],
+      },
+    ],
+  },
+  dataAnggota: {
+    eyebrow: 'Keanggotaan',
+    title: 'Data Anggota IKAPI DIY',
+    lead:
+      'Halaman ini disiapkan untuk menampilkan data anggota IKAPI DIY dengan rujukan struktur data anggota IKAPI pusat.',
+    sourceLabel: 'Anggota IKAPI - IKAPI Pusat',
+    sourceUrl: 'https://www.ikapi.org/anggota-ikapi/',
+    category: 'keanggotaan',
+    stats: [
+      { value: '1 Mei 2026', label: 'Tanggal data anggota pada laman IKAPI pusat' },
+      { value: 'Nama', label: 'Kolom utama daftar penerbit' },
+      { value: 'Status', label: 'Status aktif dan tidak aktif' },
+    ],
+    sections: [
+      {
+        eyebrow: 'Rujukan Data',
+        title: 'Format data anggota IKAPI',
+        body: [
+          'Laman anggota IKAPI pusat menampilkan data anggota per 1 Mei 2026. Struktur pencarian mencakup nama penerbit, nomor anggota, masa berlaku KTA, dan status keanggotaan.',
+          'Untuk IKAPI DIY, halaman ini dapat dipakai sebagai ruang publik daftar penerbit anggota wilayah DIY. Jika data lokal tersedia dari WordPress, konten WordPress akan otomatis menggantikan fallback ini.',
+        ],
+      },
+      {
+        eyebrow: 'Kolom Data',
+        title: 'Informasi yang perlu ditampilkan',
+        cards: [
+          {
+            title: 'Nama Penerbit',
+            body: 'Nama resmi penerbit anggota sesuai data keanggotaan.',
+          },
+          {
+            title: 'Nomor Anggota',
+            body: 'Nomor anggota IKAPI untuk identifikasi administratif.',
+          },
+          {
+            title: 'Masa KTA',
+            body: 'Tanggal atau periode berakhirnya Kartu Tanda Anggota.',
+          },
+          {
+            title: 'Status',
+            body: 'Status aktif atau tidak aktif agar publik dapat memverifikasi keanggotaan.',
+          },
+        ],
+      },
+      {
+        eyebrow: 'Catatan Implementasi',
+        title: 'Data DIY perlu dipisahkan dari data nasional',
+        items: [
+          'Gunakan data lokal IKAPI DIY jika sekretariat sudah memiliki daftar final anggota daerah.',
+          'Tampilkan pranala ke data IKAPI pusat sebagai rujukan nasional.',
+          'Hindari menyalin tabel nasional secara penuh jika kebutuhan halaman adalah daftar anggota khusus DIY.',
+          'Pastikan pembaruan data dilakukan dari WordPress atau endpoint terstruktur agar tidak perlu mengubah kode.',
         ],
       },
     ],

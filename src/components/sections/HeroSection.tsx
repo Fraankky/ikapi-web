@@ -1,14 +1,5 @@
 import { Link } from 'react-router-dom'
 import anggotaPhoto from '../../assets/ikapi-anggota.jpeg'
-import ikapiLogo from '../../assets/ikapi-putih.png'
-
-function HeroBadge() {
-  return (
-    <span className="inline-flex w-fit rounded-full border border-[#d8cfbf] bg-[#fffdfa] px-3 py-1 text-sm font-medium tracking-[-0.02em] text-[var(--ikapi-ink)]">
-      Portal resmi sudah aktif
-    </span>
-  )
-}
 
 function HeroArrow() {
   return (
@@ -55,13 +46,13 @@ function HeroButton({
 }) {
   const className =
     variant === 'primary'
-      ? 'bg-[var(--ikapi-ink)] text-white hover:bg-[var(--ikapi-ink-soft)]'
-      : 'border border-[#d4c8b8] bg-transparent text-[var(--ikapi-ink)] hover:border-[var(--ikapi-ink)] hover:bg-[#fffdfa]'
+      ? 'bg-[#102f58] text-white hover:bg-[#173966]'
+      : 'border border-[#d4c8b8] bg-[#fffaf2]/72 text-[var(--ikapi-ink)] hover:border-[#102f58] hover:bg-[#fffaf2]'
 
   return (
     <Link
       to={to}
-      className={`group inline-flex h-12 items-center justify-center gap-4 rounded-[0.8rem] px-5 text-sm font-semibold tracking-[-0.02em] transition active:translate-y-[1px] ${className}`}
+      className={`group inline-flex h-[3.25rem] items-center justify-center gap-4 rounded-md px-5 pl-6 text-sm font-semibold tracking-[-0.02em] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-0.5 active:translate-y-[1px] ${className}`}
     >
       {children}
     </Link>
@@ -70,53 +61,57 @@ function HeroButton({
 
 export function HeroSection() {
   return (
-    <section className="w-full border-b border-[#e7dece] bg-[var(--ikapi-paper)] py-20 lg:py-40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-          <div className="flex flex-col gap-4">
-            <div>
-              <HeroBadge />
+    <section className="relative isolate w-full overflow-hidden border-b border-[#e2d5c4] bg-[linear-gradient(135deg,#fffaf2_0%,#f3ebde_55%,#e8ddcd_100%)] pb-16 pt-36 sm:pb-20 sm:pt-40 lg:pb-28 lg:pt-44">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-10 lg:gap-12">
+          <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-5 text-center">
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 -z-10 size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#dfd2bf]/70 p-16 [mask-image:linear-gradient(to_top,transparent,white,white,transparent)] md:size-[72rem] md:p-28"
+            >
+              <div className="size-full rounded-full border border-[#dfd2bf]/65 p-16 md:p-28">
+                <div className="size-full rounded-full border border-[#dfd2bf]/60" />
+              </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <h1 className="max-w-lg text-left text-5xl font-normal leading-[0.9] tracking-[-0.065em] text-[var(--ikapi-ink)] text-balance md:text-7xl">
-                Menguatkan penerbit, merawat literasi.
-              </h1>
-              <p className="max-w-md text-left text-xl leading-relaxed tracking-[-0.03em] text-slate-600">
-                IKAPI DIY mempertemukan penerbit, pembaca, sekolah, dan komunitas agar ekosistem
-                buku Yogyakarta bergerak lebih rapi dan terbaca.
-              </p>
-            </div>
+            <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-[var(--ikapi-ink)] md:text-6xl lg:text-7xl">
+              Menguatkan penerbit, merawat literasi.
+            </h1>
+            <p className="mx-auto max-w-2xl text-base leading-8 tracking-[-0.01em] text-[var(--ikapi-muted)] md:text-lg">
+              IKAPI DIY mempertemukan penerbit, pembaca, sekolah, dan komunitas agar ekosistem
+              buku Yogyakarta bergerak lebih rapi dan terbaca.
+            </p>
 
-            <div className="flex flex-col gap-4 pt-1 sm:flex-row">
+            <div className="flex flex-col items-center justify-center gap-3 pt-3 sm:flex-row">
               <HeroButton to="/kontak" variant="outline">
                 Hubungi sekretariat
-                <HeroPhone />
+                <span className="grid h-8 w-8 place-items-center rounded-md bg-[#102f58]/8 text-[#102f58] transition group-hover:translate-x-0.5">
+                  <HeroPhone />
+                </span>
               </HeroButton>
               <HeroButton to="/keanggotaan/syarat">
                 Menjadi anggota
-                <HeroArrow />
+                <span className="grid h-8 w-8 place-items-center rounded-md bg-white/12 text-white transition group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                  <HeroArrow />
+                </span>
               </HeroButton>
+            </div>
+
+            <div className="pb-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Forum penerbit, agenda buku, dan jejaring literasi Yogyakarta
             </div>
           </div>
 
-          <div className="relative aspect-square overflow-hidden rounded-md bg-[#e8dfd2]">
-            <img
-              src={anggotaPhoto}
-              alt="Anggota IKAPI DIY dalam Musyawarah Daerah"
-              className="h-full w-full object-cover grayscale-[12%]"
-            />
-            <div className="absolute inset-0 bg-[var(--ikapi-ink)]/10" />
-            <div className="absolute inset-x-6 bottom-6 grid gap-3 rounded-[0.85rem] border border-white/20 bg-[var(--ikapi-ink)]/82 p-5 text-white backdrop-blur-md">
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/65">
-                  Dokumentasi organisasi
-                </p>
-                <img src={ikapiLogo} alt="" className="h-8 w-auto" />
+          <div className="mx-auto w-full max-w-6xl">
+            <div className="rounded-[1.25rem] border border-[#d8cbb8] bg-[#fffaf2]/72 p-2">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[#e8dfd2] sm:aspect-[16/8.4]">
+                <img
+                  src={anggotaPhoto}
+                  alt="Anggota IKAPI DIY dalam Musyawarah Daerah"
+                  className="h-full w-full object-cover object-center transition duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(20_34_56_/_0.01),rgb(20_34_56_/_0.1))]" />
               </div>
-              <p className="max-w-sm text-2xl font-medium leading-tight tracking-[-0.04em]">
-                Musyawarah Daerah IKAPI DIY 2026
-              </p>
             </div>
           </div>
         </div>
