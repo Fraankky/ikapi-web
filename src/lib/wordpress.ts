@@ -1,8 +1,10 @@
 import type { WPCategory, WPPage, WPPost } from '../types/wordpress'
 
 const DEFAULT_WP_API_BASE = '/wp-json/wp/v2'
+const DEFAULT_REQUEST_TIMEOUT_MS = 12000
 
 const WP_API_BASE = normalizeApiBase(import.meta.env.VITE_WP_API_BASE)
+const WP_REQUEST_TIMEOUT_MS = normalizeRequestTimeout(import.meta.env.VITE_WP_REQUEST_TIMEOUT_MS)
 
 class WordPressApiError extends Error {
   status?: number
@@ -19,6 +21,16 @@ function normalizeApiBase(apiBase?: string) {
   return base.replace(/\/+$/, '')
 }
 
+function normalizeRequestTimeout(timeout?: string) {
+  const parsedTimeout = Number(timeout)
+
+  if (!Number.isFinite(parsedTimeout) || parsedTimeout <= 0) {
+    return DEFAULT_REQUEST_TIMEOUT_MS
+  }
+
+  return Math.min(Math.max(parsedTimeout, 3000), 30000)
+}
+
 function buildApiUrl(endpoint: string) {
   const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`
   return `${WP_API_BASE}${path}`
@@ -26,18 +38,27 @@ function buildApiUrl(endpoint: string) {
 
 async function fetchFromWP<T>(endpoint: string, errorMessage: string): Promise<T> {
   let response: Response
+  const controller = new AbortController()
+  const timeoutId = window.setTimeout(() => controller.abort(), WP_REQUEST_TIMEOUT_MS)
 
   try {
     response = await fetch(buildApiUrl(endpoint), {
       headers: {
         Accept: 'application/json',
       },
+      signal: controller.signal,
     })
   } catch (error) {
+    const isTimeout = error instanceof DOMException && error.name === 'AbortError'
+
     throw new WordPressApiError(
-      `${errorMessage}. Tidak dapat terhubung ke WordPress API di ${WP_API_BASE}.`,
+      isTimeout
+        ? `${errorMessage}. WordPress API tidak merespons dalam ${Math.round(WP_REQUEST_TIMEOUT_MS / 1000)} detik.`
+        : `${errorMessage}. Tidak dapat terhubung ke WordPress API di ${WP_API_BASE}.`,
       { cause: error },
     )
+  } finally {
+    window.clearTimeout(timeoutId)
   }
 
   if (!response.ok) {

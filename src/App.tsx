@@ -6,6 +6,7 @@ import { BeritaPage } from './pages/BeritaPage'
 import { HomePage } from './pages/HomePage'
 import { JogjaBookFairPage } from './pages/JogjaBookFairPage'
 import { KontakPage } from './pages/KontakPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { ProgramPage } from './pages/ProgramPage'
 import { DataAnggotaPage } from './pages/keanggotaan/DataAnggotaPage'
 import { ManfaatPage } from './pages/keanggotaan/ManfaatPage'
@@ -42,6 +43,7 @@ function App() {
         <Route path="/program" element={<ProgramPage />} />
         <Route path="/kontak" element={<KontakPage />} />
         <Route path="/jogja-book-fair" element={<JogjaBookFairPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )
