@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import ikapiLogo from '../../assets/ikapi-putih.png'
 import { navigationPageSlugs } from '../../content/sitePages'
@@ -18,7 +18,7 @@ function resolvePageTitle(
 }
 
 function linkClass({ isActive }: { isActive: boolean }) {
-  return `relative inline-flex min-h-[2.375rem] items-center rounded-md px-3.5 text-sm font-semibold tracking-[-0.02em] transition active:translate-y-[1px] ${
+  return `relative inline-flex min-h-[2.5rem] items-center rounded-md px-3 text-sm font-semibold tracking-[-0.02em] transition active:translate-y-[1px] xl:px-3.5 ${
     isActive
       ? 'bg-[#e9dfd1] text-[var(--ikapi-ink)]'
       : 'text-slate-600 hover:bg-[#f1e8dc] hover:text-[var(--ikapi-ink)]'
@@ -26,10 +26,30 @@ function linkClass({ isActive }: { isActive: boolean }) {
 }
 
 function Dropdown({ label, items, active }: { label: string; items: string[][]; active: boolean }) {
+  const [open, setOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const openClass = open
+    ? 'visible translate-y-0 opacity-100'
+    : 'invisible translate-y-2 opacity-0 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100'
+
   return (
-    <div className="group relative">
+    <div
+      ref={dropdownRef}
+      className="group relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setOpen(false)
+        }
+      }}
+    >
       <button
-        className={`relative inline-flex min-h-[2.375rem] items-center rounded-md px-3.5 text-sm font-semibold tracking-[-0.02em] transition active:translate-y-[1px] ${
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+        className={`relative inline-flex min-h-[2.5rem] items-center rounded-md px-3 text-sm font-semibold tracking-[-0.02em] transition active:translate-y-[1px] xl:px-3.5 ${
           active
             ? 'bg-[#e9dfd1] text-[var(--ikapi-ink)]'
             : 'text-slate-600 hover:bg-[#f1e8dc] hover:text-[var(--ikapi-ink)]'
@@ -37,12 +57,17 @@ function Dropdown({ label, items, active }: { label: string; items: string[][]; 
       >
         {label}
       </button>
-      <div className="invisible absolute left-1/2 top-full z-20 mt-3 w-76 -translate-x-1/2 translate-y-2 rounded-lg border border-[#ded4c6] bg-[#fffaf2]/92 p-1.5 opacity-0 shadow-[0_12px_32px_-24px_rgb(20_34_58_/_0.7)] backdrop-blur-lg transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+      <div
+        role="menu"
+        className={`absolute left-1/2 top-full z-20 mt-3 w-76 -translate-x-1/2 rounded-lg border border-[#ded4c6] bg-[#fffaf2] p-1.5 shadow-[0_18px_38px_-26px_rgb(20_34_58_/_0.78)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${openClass}`}
+      >
         <div className="absolute -top-5 left-0 h-5 w-full" />
         {items.map(([text, href]) => (
           <NavLink
             key={href}
             to={href}
+            role="menuitem"
+            onClick={() => setOpen(false)}
             className={({ isActive }) =>
               `block rounded-md px-3 py-2.5 text-sm font-semibold tracking-[-0.01em] transition ${
                 isActive
@@ -106,14 +131,14 @@ export function Navbar() {
   const jbfLabel = resolvePageTitle(pages, navigationPageSlugs.jogjaBookFair, 'Jogja Book Fair')
 
   return (
-    <header className="sticky top-5 z-30 mx-auto -mb-18 w-full px-3 sm:px-4">
-      <div className="mx-auto max-w-5xl rounded-lg border border-[#ded4c6] bg-[#fffaf2]/78 shadow-[0_8px_22px_-18px_rgb(20_34_58_/_0.35)] backdrop-blur-lg">
+    <header className="sticky top-3 z-30 mx-auto w-full px-3 sm:top-4 sm:px-4">
+      <div className="mx-auto max-w-7xl rounded-lg border border-[#ded4c6] bg-[#fffaf2] shadow-[0_12px_28px_-22px_rgb(20_34_58_/_0.55)]">
         <nav className="mx-auto p-2">
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center justify-between gap-3 lg:grid lg:grid-cols-[auto_minmax(0,1fr)_auto]">
             <Link
               to="/"
               onClick={() => setOpen(false)}
-              className="group flex w-fit items-center gap-2 rounded-md px-2 py-1.5 transition hover:bg-[#f1e8dc]"
+              className="group flex min-w-0 items-center gap-2 rounded-md px-2 py-1.5 transition hover:bg-[#f1e8dc]"
             >
               <img
                 src={ikapiLogo}
@@ -124,6 +149,36 @@ export function Navbar() {
                 IKAPI DIY
               </span>
             </Link>
+
+            <div className="hidden min-w-0 flex-wrap items-center justify-center gap-1 lg:flex">
+              <NavLink to="/" className={linkClass}>
+                Home
+              </NavLink>
+              <Dropdown label="Tentang IKAPI" items={tentangLinks} active={isTentang} />
+              <Dropdown label="Keanggotaan" items={anggotaLinks} active={isAnggota} />
+              <NavLink to="/program" className={linkClass}>
+                {programLabel}
+              </NavLink>
+              <NavLink to="/berita" className={linkClass}>
+                Berita
+              </NavLink>
+              <NavLink to="/kontak" className={linkClass}>
+                {kontakLabel}
+              </NavLink>
+            </div>
+
+            <NavLink
+              to="/jogja-book-fair"
+              className={({ isActive }) =>
+                `hidden min-h-[2.5rem] items-center justify-center whitespace-nowrap rounded-md px-3.5 text-sm font-semibold tracking-[-0.02em] transition hover:-translate-y-0.5 active:translate-y-[1px] lg:inline-flex xl:px-4 ${
+                  isActive
+                    ? 'bg-[#102f58] text-white'
+                    : 'bg-[#102f58] text-white hover:bg-[#173966]'
+                }`
+              }
+            >
+              {jbfLabel}
+            </NavLink>
 
             <button
               type="button"
@@ -136,28 +191,6 @@ export function Navbar() {
               <MenuIcon open={open} />
             </button>
           </div>
-
-          <div className="hidden flex-wrap items-center gap-1 lg:flex lg:justify-center">
-            <NavLink to="/" className={linkClass}>Home</NavLink>
-            <Dropdown label="Tentang IKAPI" items={tentangLinks} active={isTentang} />
-            <Dropdown label="Keanggotaan" items={anggotaLinks} active={isAnggota} />
-            <NavLink to="/program" className={linkClass}>{programLabel}</NavLink>
-            <NavLink to="/berita" className={linkClass}>Berita</NavLink>
-            <NavLink to="/kontak" className={linkClass}>{kontakLabel}</NavLink>
-          </div>
-
-          <NavLink
-            to="/jogja-book-fair"
-            className={({ isActive }) =>
-              `hidden min-h-[2.375rem] w-fit items-center justify-center rounded-md px-4 text-sm font-semibold tracking-[-0.02em] transition hover:-translate-y-0.5 active:translate-y-[1px] lg:inline-flex ${
-                isActive
-                  ? 'bg-[#102f58] text-white'
-                  : 'bg-[#102f58] text-white hover:bg-[#173966]'
-              }`
-            }
-          >
-            {jbfLabel}
-          </NavLink>
 
           <div
             id="mobile-navigation"

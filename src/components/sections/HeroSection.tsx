@@ -61,7 +61,7 @@ function HeroButton({
 
 export function HeroSection() {
   return (
-    <section className="relative isolate w-full overflow-hidden border-b border-[#e2d5c4] bg-[linear-gradient(135deg,#fffaf2_0%,#f3ebde_55%,#e8ddcd_100%)] pb-16 pt-36 sm:pb-20 sm:pt-40 lg:pb-28 lg:pt-44">
+    <section className="relative isolate w-full overflow-hidden border-b border-[#e2d5c4] bg-[linear-gradient(135deg,#fffaf2_0%,#f3ebde_55%,#e8ddcd_100%)] pb-16 pt-20 sm:pb-20 sm:pt-24 lg:pb-28 lg:pt-28">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 lg:gap-12">
           <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-5 text-center">

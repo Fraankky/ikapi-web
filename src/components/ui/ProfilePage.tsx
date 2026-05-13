@@ -12,7 +12,7 @@ export function ProfilePage({ data, slugs }: ProfilePageProps) {
   return (
     <main>
       <section className="border-b border-[#e2d8c8] bg-[#f7f3ec]">
-        <div className="mx-auto max-w-5xl px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-40">
+        <div className="mx-auto max-w-5xl px-4 pb-16 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pb-24 lg:pt-28">
           <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--ikapi-accent)]">{data.eyebrow}</p>
             <h1 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.035em] text-[var(--ikapi-ink)] text-balance sm:text-6xl">

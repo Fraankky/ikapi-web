@@ -70,6 +70,20 @@ async function fetchFromWP<T>(endpoint: string, errorMessage: string): Promise<T
     )
   }
 
+  const contentType = response.headers.get('content-type') ?? ''
+  if (!contentType.includes('application/json')) {
+    const preview = await response.text()
+
+    throw new WordPressApiError(
+      `${errorMessage}. WordPress API mengembalikan ${contentType || 'konten non-JSON'} dari ${buildApiUrl(endpoint)}${
+        preview.trim().startsWith('<!doctype') || preview.trim().startsWith('<html')
+          ? '. Endpoint kemungkinan mengarah ke halaman frontend, bukan REST API WordPress.'
+          : '.'
+      }`,
+      { status: response.status },
+    )
+  }
+
   return (await response.json()) as T
 }
 

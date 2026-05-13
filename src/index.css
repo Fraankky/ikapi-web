@@ -13,10 +13,6 @@
   --ikapi-muted: #6c756f;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   font-family:
@@ -28,22 +24,6 @@ body {
     linear-gradient(180deg, #fffaf2 0%, var(--ikapi-paper) 48%, #efe6d8 100%);
   color: #334155;
   font-variant-numeric: tabular-nums;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image:
-    linear-gradient(115deg, rgb(20 34 56 / 0.28) 0 1px, transparent 1px),
-    radial-gradient(circle at 20% 20%, rgb(20 34 56 / 0.22) 0 1px, transparent 1px);
-  background-size:
-    44px 44px,
-    9px 9px;
-  mix-blend-mode: multiply;
 }
 
 #root {

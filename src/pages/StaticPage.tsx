@@ -22,7 +22,7 @@ export function StaticPage({ title, slugs, eyebrow = 'IKAPI DIY', fallback, pref
   const safeTitle = pageData?.title.rendered ? sanitizeWordPressHtml(pageData.title.rendered) : ''
 
   return (
-    <main className="mx-auto max-w-4xl px-4 pb-14 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-20 lg:pt-40">
+    <main className="mx-auto max-w-4xl px-4 pb-14 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-28">
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--ikapi-accent)]">{eyebrow}</p>
       {pageData?.title.rendered ? (
         <h1

@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/wp-json': {
-        target: 'https://ikapidiy.com',
+        target: 'https://cms.ikapidiy.com',
         changeOrigin: true,
       },
     },

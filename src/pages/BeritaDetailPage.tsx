@@ -15,7 +15,7 @@ export function BeritaDetailPage() {
   const safeTitle = post ? sanitizeWordPressHtml(post.title.rendered) : ''
 
   return (
-    <main className="mx-auto max-w-4xl px-4 pb-14 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-20 lg:pt-40">
+    <main className="mx-auto max-w-4xl px-4 pb-14 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-28">
       <Link to="/berita" className="text-sm font-semibold text-[var(--ikapi-ink)] hover:text-[var(--ikapi-accent)]">
         Kembali ke berita
       </Link>
