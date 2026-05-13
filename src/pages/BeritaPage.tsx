@@ -1,6 +1,5 @@
 import { usePosts } from '../hooks/usePosts'
 import { EmptyState } from '../components/ui/EmptyState'
-import { ErrorMessage } from '../components/ui/ErrorMessage'
 import { LoadingSpinner } from '../components/ui/LoadingSpinner'
 import { PostCard } from '../components/ui/PostCard'
 
@@ -15,7 +14,12 @@ export function BeritaPage() {
       </h1>
       <div className="mt-10">
         {isLoading ? <LoadingSpinner variant="cards" /> : null}
-        {error ? <ErrorMessage message={(error as Error).message} /> : null}
+        {error ? (
+          <EmptyState
+            title="Berita belum bisa dimuat"
+            message="Koneksi ke sumber berita sedang tidak tersedia. Silakan coba lagi beberapa saat lagi, atau hubungi sekretariat IKAPI DIY untuk informasi terbaru."
+          />
+        ) : null}
         {data && data.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.map((post) => (
@@ -24,7 +28,10 @@ export function BeritaPage() {
           </div>
         ) : null}
         {data && data.length === 0 ? (
-          <EmptyState message="Belum ada berita yang dipublikasikan dari WordPress untuk saat ini." />
+          <EmptyState
+            title="Belum ada berita"
+            message="Belum ada berita yang dipublikasikan dari WordPress untuk saat ini. Konten terbaru akan tampil otomatis setelah tersedia."
+          />
         ) : null}
       </div>
     </main>

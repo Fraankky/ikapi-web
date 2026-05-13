@@ -1,6 +1,6 @@
 import type { WPCategory, WPPage, WPPost } from '../types/wordpress'
 
-const DEFAULT_WP_API_BASE = '/wp-json/wp/v2'
+const DEFAULT_WP_API_BASE = 'https://cms.ikapidiy.com/wp-json/wp/v2'
 const DEFAULT_REQUEST_TIMEOUT_MS = 12000
 
 const WP_API_BASE = normalizeApiBase(import.meta.env.VITE_WP_API_BASE)

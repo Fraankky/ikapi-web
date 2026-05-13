@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { usePosts } from '../../hooks/usePosts'
 import { EmptyState } from '../ui/EmptyState'
-import { ErrorMessage } from '../ui/ErrorMessage'
 import { LoadingSpinner } from '../ui/LoadingSpinner'
 import { PostCard } from '../ui/PostCard'
 
@@ -39,7 +38,12 @@ export function BeritaTerbaru() {
         </Link>
       </div>
       {isLoading ? <LoadingSpinner variant="cards" /> : null}
-      {error ? <ErrorMessage message={(error as Error).message} /> : null}
+      {error ? (
+        <EmptyState
+          title="Berita belum bisa dimuat"
+          message="Sumber berita sedang tidak dapat diakses. Bagian ini akan terisi kembali setelah koneksi ke WordPress pulih."
+        />
+      ) : null}
       {data && data.length > 0 ? (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.15fr_0.92fr_0.92fr]">
           {data.map((post) => (
@@ -48,7 +52,10 @@ export function BeritaTerbaru() {
         </div>
       ) : null}
       {data && data.length === 0 ? (
-        <EmptyState message="Berita terbaru akan tampil di sini setelah konten dipublikasikan dari WordPress." />
+        <EmptyState
+          title="Belum ada berita terbaru"
+          message="Berita terbaru akan tampil di sini setelah konten dipublikasikan dari WordPress."
+        />
       ) : null}
     </section>
   )
